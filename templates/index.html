@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Minimal, clean, Apple-like vibe: big whitespace, crisp typography -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cyber News Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <script defer src="{{ url_for('static', filename='app.js') }}"></script>
+</head>
+<body>
+  <!-- Simple sticky header -->
+  <header class="site-header">
+    <div class="container">
+      <div class="brand">
+        <!-- Subtle tech/cyber accent with a shield dot -->
+        <span class="logo-dot" aria-hidden="true"></span>
+        <span class="brand-text">Cyber<span class="thin">News</span></span>
+      </div>
+      <button id="toggle-theme" class="ghost-btn" aria-label="Toggle theme">
+        <!-- Button has no text, only CSS icon -->
+      </button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h1 class="title">Stay ahead of threats</h1>
+      <p class="subtitle">Fresh cybersecurity & technology headlines, updated live.</p>
+    </section>
+
+    <section class="cards">
+      <!-- Loop over articles coming from Flask -->
+      {% for a in articles %}
+      <article class="card">
+        <!-- Accessible clickable area for the article -->
+        <a href="{{ a.url }}" class="card-link" target="_blank" rel="noopener noreferrer">
+          <h2 class="card-title">{{ a.title }}</h2>
+          {% if a.description %}
+            <p class="card-desc">{{ a.description }}</p>
+          {% endif %}
+          <div class="card-meta">
+            <span class="chip">{{ a.source.name }}</span>
+            {% if a.publishedAt %}
+              <time datetime="{{ a.publishedAt }}">{{ a.publishedAt[:10] }}</time>
+            {% endif %}
+          </div>
+        </a>
+      </article>
+      {% endfor %}
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Built with Flask + NewsAPI • designed by Orel</p>
+    </div>
+  </footer>
+</body>
+</html>
