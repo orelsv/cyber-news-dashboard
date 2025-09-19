@@ -1,4 +1,4 @@
-# main.py
+
 import os
 import requests
 from time import time
@@ -33,7 +33,6 @@ def _static_build_version() -> int:
 
 @app.context_processor
 def inject_build_version():
-    # Expose `build_version` for `...?v={{ build_version }}` in templates
     return {"build_version": _static_build_version()}
 
 # ---------- External API config ----------
@@ -109,8 +108,7 @@ def search():
     articles = fetch_articles(q)
     return render_template("search.html", articles=articles, q=q)
 
-# ---------- Entrypoint ----------
+
 if __name__ == "__main__":
-    # Replit-friendly default; locally you can `export PORT=5000` if you prefer.
     port = int(os.getenv("PORT", "81"))
     app.run(host="0.0.0.0", port=port, debug=False)
