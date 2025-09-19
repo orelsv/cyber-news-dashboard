@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en" data-theme="auto">
+<head>
+  
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cyber News Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}?v={{ build_version }}">
+  <script defer src="{{ url_for('static', filename='js/app.js') }}?v={{ build_version }}"></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="{{ url_for('index') }}">CyberPulse</a>
+      <form class="search" action="{{ url_for('search') }}" method="get" role="search">
+        <input type="search" name="q" placeholder="Search cybersecurity topics..."
+               value="{{ request.args.get('q', '') }}" aria-label="Search" />
+        <button type="submit" class="btn">Search</button>
+      </form>
+    </div>
+  </header>
+
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© {{ 2025 }} CyberPulse — Minimal cyber news, maximum clarity.</p>
+    </div>
+  </footer>
+</body>
+</html>

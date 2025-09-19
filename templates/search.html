@@ -2,8 +2,8 @@
 
 {% block content %}
   <section class="hero">
-    <h1>Latest Cybersecurity Headlines</h1>
-    <p class="sub">Default feed: {{ default_query }}</p>
+    <h1>Search results</h1>
+    <p class="sub">Query: “{{ q }}”</p>
   </section>
 
   <section class="grid">
@@ -24,7 +24,7 @@
         </a>
       </article>
     {% else %}
-      <p>No articles found.</p>
+      <p>No results for “{{ q }}”. Try another term.</p>
     {% endfor %}
   </section>
 {% endblock %}
