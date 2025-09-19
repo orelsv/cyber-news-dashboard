@@ -7,3 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
     root.classList.toggle("theme-dark");
   });
 });
+(function () {
+  try {
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    document.documentElement.dataset.color = prefersDark ? 'dark' : 'light';
+  } catch (e) {
+    // no-op
+  }
+})();
