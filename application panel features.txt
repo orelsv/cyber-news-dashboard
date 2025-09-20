@@ -1,0 +1,38 @@
+admin panel features
+Key Features:
+Dashboard Tab:
+
+Real-time statistics (articles, API calls, uptime, users)
+Popular search queries with usage analytics
+Recent articles overview
+Visual metrics with color-coded cards
+
+Articles Tab:
+
+Article management interface
+Search and filter functionality
+Tabular view of all articles with metadata
+Refresh and management actions
+
+Settings Tab:
+
+NewsAPI configuration management
+Default query customization
+Page size, language, and sorting preferences
+Cache and retry settings
+Save/reset functionality
+
+Monitoring Tab:
+
+System health indicators
+Recent alerts and notifications
+Performance metrics
+API quota tracking
+
+Design Highlights:
+
+Modern, clean interface with Tailwind CSS
+Responsive design for all screen sizes
+Interactive elements with hover effects
+Color-coded status indicators
+Professional admin panel aesthetic
