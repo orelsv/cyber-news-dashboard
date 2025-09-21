@@ -3,28 +3,43 @@
 {% block content %}
   <section class="hero">
     <h1>Search results</h1>
-    <p class="sub">Query: “{{ q }}”</p>
+
+    <p class="sub">Query: “{{ effective_q }}”</p>
   </section>
 
   <section class="grid">
-    {% for a in articles %}
-      <article class="card">
-        <a href="{{ a.url }}" target="_blank" rel="noopener">
-          <div class="media" aria-hidden="true">
-            {% if a.image %}<img src="{{ a.image }}" alt="" />{% endif %}
-          </div>
-          <div class="content">
-            <h2 class="title">{{ a.title }}</h2>
-            <p class="desc">{{ a.description }}</p>
-            <div class="meta">
-              <span>{{ a.source }}</span><span>•</span>
-              <time datetime="{{ a.published }}">{{ a.published|format_iso }}</time>
+    {% if articles and articles|length %}
+      {# Render a responsive grid of result cards #}
+      {% for a in articles %}
+        <article class="card">
+          <!-- Link to original article -->
+          <a href="{{ a.url }}" target="_blank" rel="noopener">
+            <div class="media" aria-hidden="true">
+              {# Show image only if present #}
+              {% if a.image %}
+                <img src="{{ a.image }}" alt="">
+              {% endif %}
             </div>
-          </div>
-        </a>
-      </article>
+
+            <div class="content">
+              <!-- Title + short description -->
+              <h2 class="title">{{ a.title }}</h2>
+              <p class="desc">{{ a.description }}</p>
+
+              <!-- Source name + formatted published date -->
+              <div class="meta">
+                <span>{{ a.source }}</span><span>•</span>
+                <time datetime="{{ a.published }}">
+                  {{ a.published | format_iso }}
+                </time>
+              </div>
+            </div>
+          </a>
+        </article>
+      {% endfor %}
     {% else %}
-      <p>No results for “{{ q }}”. Try another term.</p>
-    {% endfor %}
+      <!-- Friendly empty state when no results were returned -->
+      <p>No results for “{{ effective_q }}”. Try another term.</p>
+    {% endif %}
   </section>
 {% endblock %}

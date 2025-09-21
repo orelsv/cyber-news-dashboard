@@ -3,28 +3,39 @@
 {% block content %}
   <section class="hero">
     <h1>Latest Cybersecurity Headlines</h1>
+    <!-- Show which query is used by default -->
     <p class="sub">Default feed: {{ default_query }}</p>
   </section>
 
   <section class="grid">
-    {% for a in articles %}
-      <article class="card">
-        <a href="{{ a.url }}" target="_blank" rel="noopener">
-          <div class="media" aria-hidden="true">
-            {% if a.image %}<img src="{{ a.image }}" alt="" />{% endif %}
-          </div>
-          <div class="content">
-            <h2 class="title">{{ a.title }}</h2>
-            <p class="desc">{{ a.description }}</p>
-            <div class="meta">
-              <span>{{ a.source }}</span><span>•</span>
-              <time datetime="{{ a.published }}">{{ a.published|format_iso }}</time>
+    {% if articles and articles|length %}
+      {% for a in articles %}
+        <article class="card">
+          <!-- Link to the original article -->
+          <a href="{{ a.url }}" target="_blank" rel="noopener">
+            <div class="media" aria-hidden="true">
+              <!-- Only show image if present -->
+              {% if a.image %}
+                <img src="{{ a.image }}" alt="">
+              {% endif %}
             </div>
-          </div>
-        </a>
-      </article>
+            <div class="content">
+              <h2 class="title">{{ a.title }}</h2>
+              <p class="desc">{{ a.description }}</p>
+              <div class="meta">
+                <!-- Show source name + formatted date -->
+                <span>{{ a.source }}</span><span>•</span>
+                <time datetime="{{ a.published }}">
+                  {{ a.published | format_iso }}
+                </time>
+              </div>
+            </div>
+          </a>
+        </article>
+      {% endfor %}
     {% else %}
+      <!-- Fallback when no articles were returned -->
       <p>No articles found.</p>
-    {% endfor %}
+    {% endif %}
   </section>
 {% endblock %}
