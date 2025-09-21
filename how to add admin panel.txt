@@ -1,0 +1,5 @@
+Completely Separate ]
+
+React app runs on different port (e.g., Flask on :5000, React on :3000)
+React makes API calls to Flask endpoints
+You'd add new Flask routes like /api/stats, /api/articles, /api/settings
